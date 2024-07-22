@@ -37,6 +37,23 @@
                     np.roll(a=arra,shift =2,axis=1)
 --  to join two array
                      np.concatenate((array1,array2),axis =1)
-          
 
-                    
+
+                        __ARRAY MATH OPERATIONS___
+
+                    arra +100  # Add 100 to every element of arra
+                    arra -100  # Subtract 100 to every element of arra 
+                    arra*2     # Multiply 2 to every element of arra
+                    arra**2    #  Square every element of arra
+                    arra%2     # Take modulas to every element of arra
+                    arra+arra
+                    arra-arra
+
+                      np.mean(arra) = average of array
+                      np.mean(arra,axis=1)           # Get mean of each row
+                      np.std(arra)               # get standard deviation
+                      np.sum(arra,axis=1)        # Get the Row Sums
+                      np.sum(arra,axis =0)         # Get the Sum across the Column
+                      np.log(arra)                 # Take the log of each element of array
+                      np.sqrt(arra)                 # Take the square root of each element of array
+                      np.dot(arra[0,0:],arra[1,0:])  # Take the vector dot product of row1 and row2
