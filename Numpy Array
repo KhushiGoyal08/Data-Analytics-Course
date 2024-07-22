@@ -1,0 +1,42 @@
+                                       NUMPY ARRAY
+
+          import numpy as np
+
+-- Make list and assign it to np.array(list)
+
+                 l=[1,2,3,4]
+                arr = np.array(l)
+                type(arr) = numpy.ndarray
+                l2=[7,88,9,5]
+                arra=np.array([l,l2])         --- 2d array
+-- .shape func gives us the dimension i.e. no. of rows and col.
+                  arra.shape = (2,4)     -- 2 rows and 4 col.
+                  arra.size = 8
+                  arra.dtpe =dytpe('int64')
+--  to make the identity matrix we can make using
+                         np.identity(n=5) -- 5*5 matrix of identity
+
+                   np.ones(shape =[2,4])   = array([[1,1,1,1],[1,1,1,1]]) // np.zeroes same
+                      arr[3] =3
+                      arra[0,4] =4
+-- Slicing the array same as list
+         arr[::-1]
+         arra[::-1,::-1]
+-- Change the dimension of existing array
+                   np.reshape(a= arra,newshape(4,2)) = array([1,2],[3,4],[7,88],[9,5])
+-- change the multi dimension into 1-d array
+              np.ravel(a=arra,order='C')   -- by rows 
+              np.ravel(a=arra,order='F')   -- by col
+              arra.flatten()          -- ravel by rows
+-- for transpose of array
+                    arra.T
+-- flip and rotate 
+                       np.rot90(arra,k=1)          -- k=1 -no fo rotation
+-- shifting element in array
+                    np.roll(a=arra,shift =2(shift element by 2 position ),axis =1(in each row))
+                    np.roll(a=arra,shift =2,axis=1)
+--  to join two array
+                     np.concatenate((array1,array2),axis =1)
+          
+
+                    
