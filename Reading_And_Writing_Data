@@ -1,1 +1,33 @@
 
+-- Reading data into pandas DataFrames is often the first step when conducting data nalysis in Python.
+We can write and read data from csv and excel files as pandas  has the inbuilt function
+
+                      import os
+                      os.getcwd()
+                      os.chdir('/kaggle/')
+                      os.getcwd()
+                      os.listdir('/kaggle')
+                      
+-------  Reading  CSV and  TSV files
+
+                  it is in  panda dataframe function text file
+                            pd.read_table()
+
+-------------------  Reading excel files
+
+             draft =pd.read_excel('input/dft2015/draft2015.xlsx',sheet_name = 'draft2015')
+               draft.head(6)
+
+
+    ------------------- Reading Web Data 
+
+         pd.read_clipboard()            
+
+          pd.read_html()            // need the HTML5lib package
+
+
+            ---------- Writing Data 
+
+               draft.to_csv("draft_saved.csv")
+               os.listdir('/kaggle/')
+               
