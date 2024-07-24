@@ -1,1 +1,87 @@
+                               import pandas as pd
+                               import numpy as np
+-- Define a new series by passing a collectionof homogenous data like ndarray or list,along with a list of associated indexes to pd.Series()
+                                my_series=pd.Series(data =[2,3,4,5],index=['a','b','c','d'])
 
+-- Define a dictionary as htr series
+                              dict ={"x":1,"a":2,"b":5}
+                              series2=pd.Series(dict)   #key as indexes and value as data
+
+-- if u take a slice of a series ,you get both the values and the labels contained in a slice
+                              my_series[1:3]
+
+--operation
+                        my_series+series2
+                        np.mean(my_series)
+      --- DataFrame Creation and Indexing
+-- A dataframe is a 2d table with labeled columns that can each hold different types of data
+               my_dict ={"name": ["Joe","Bob","Frans"],
+                           "age":np.array([10,20,30]),
+                           "weight':(75,123,239),
+                            "height":pd.Series([4.5,5,6,],index= ["Joe","Bob","Frans"],
+                             "siblings": 1,
+                              "gender":"M"}
+
+                        df = pd.DataFrame(my_dict)
+                           df                 # Show the dataFrame
+
+ O/p ------                          name age weight height siblings gender
+                              Joe    Joe   10  75     4.5     1         M
+                              Bob    Bob   20  123    5       1         M
+                           Frans    Frans  30  239    6       1         M
+
+
+                            my_dict2 ={"name": ["Joe","Bob","Frans"],
+                           "age":np.array([10,20,30]),
+                           "weight':(75,123,239),
+                            "height":[4.5,5,6,],
+                             "siblings": 1,
+                              "gender":"M"}
+
+
+ O/p ------                          name age weight height siblings gender
+                                0    Joe   10  75     4.5     1         M
+                                1    Bob   20  123    5       1         M
+                                2    Frans  30  239    6       1         M
+
+                     df2 = pd.DataFrame(my_dict2,index =my_dict['name'])
+                     df2["weight']    or df2.weight
+                    del df2.name      // delete the col
+                    df2["IQ"] = [130,105,115]  // Add a new column
+
+-- Select both rows or columns by label with  df.loc[row,col]
+
+                        df2.loc['Joe':"Bob" ,"IQ" : "weight"]
+
+                        df2.iloc[0]         // Get row 0
+                         df2.iloc[0,5]        // get row 0,col 5
+                        df2.iloc[0:2,2:5]      //slice row and col by index
+
+-- we can use logical expression to get the data
+
+                    boolean_index=[False,True,True]
+                     df2[boolean_index]               // get the row 1 and row2
+            boolean_ind = df2["age"]>12
+              df2[boolean_ind]     or df2[df2["age"]>12]                  // use the index to get the rows where age > 12
+
+ _____________________________EXPLORING DATAFRAMES ________________________________
+
+              Exploring data is an important first step in most data analyses. DataFrames come with a 
+variety of function to help u explore and summarize the data they contain.
+
+               titanic_train =pd.read_csv("../input/train.csv")
+                  type(titanic_train)                          // pamndas.core.frame.DataFrame
+
+Notice that Titanic data is loaded as a dataframe .we can cheak the dimensions and size of a dataframe with df.shape:
+
+                         titanic_train.shape               // check dimensions
+                        titanic_train.head(6)             // check the first 6 rows
+                          titanic_train.tail(6)            // check the last 6 rows
+
+         titanic_train.index=titanic_train["Name"]           //set index to name
+                   titanic_train.columns    // get the column names
+                  titanic_train.describe()    // summarise the first 6 numeric columns    
+
+ np.mean(titanic_train,axis=0)           // get the mean of each numeric column
+
+                 titanic_train.info()
