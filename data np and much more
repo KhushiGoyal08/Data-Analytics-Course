@@ -1,0 +1,49 @@
+
+      import numpy as np
+        my_data =np.random.uniform(-1,1,25)             // draw random number from -1 to 1
+
+        ///    1 way
+        for index.number in enumerate(my_data):
+                 if number<0:
+                          my_data[index]=0    // set number less than 0 to 0
+        print(my_data)
+        //// 
+                  ///2 way
+
+        my_data =np.where(my_data<0,     // A logical test
+                          0,             // value to set if test is true
+                          my_data)       // value to set if test is false
+        print(my_data)                    // same as above for loop result // substaintially faster than loop
+
+        // function in python
+
+        def my_function(arg1,arg2):
+               return arg1+arg2
+
+          def sum_many_args(*args):   // **kwags -- named values
+                print(type(args))
+                return (sum(args))
+          sum_many_args(1,2,3,4,5,6)
+
+
+            def rmse(predicted,targets):
+                return (np.sqrt(np.mean((targets-predicted)**2)))
+
+                  // lambda function
+                    lamda x,y:x+y
+
+                      // map()
+                      def square(x):
+                          return x*x
+                            mymap=map(square,[1,2,3,4,5,6])
+
+                            for items in mymap:
+                               print(items)   //[1,4,9,16,25,36]
+
+                            // mymap= map(lambda x:x*x,[1,2,3,4,5,6])
+
+                            // list comprehension
+
+                            mylist =[number for number in range(0,101) if number%2==0]
+                           combined =[a+b for a in "life" for b in "study"]  // ['ls','lt','lu','ld','ly','is','it' ...etc]
+                    
