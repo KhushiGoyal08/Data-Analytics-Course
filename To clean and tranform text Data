@@ -1,1 +1,45 @@
+--- This code is used for loading data rom the reddit comment database
 
+              import sqlite3
+              import pandas as pd
+
+               sql_conn =sqlite3.connect('.../input/reddit-comments.may-2015/database.sqlite')
+               comments =pd.read_sql("SELECT body FROM May2015 WHERE subreddit ='timberwolves'",sql_conn)
+
+               comments =comments["body"]    // Convert from df to series
+                 print(commments.shape)
+                 comments.head(8)
+
+                  comments[0].lower()
+                  comments.str.upper().head(8) // Convert all of the  comments to uppercase
+                    comments.str.len().head(8)   // get the length of all comments
+-- Split function take off the string and put them into the list seperated by commas
+                comments.str.split(' ').head(8)
+
+comments.str.cat()[0:500]   // check the first 500 characters
+
+    comments.str[0:10].head(8)  //  slice the 1st 10 characters of all 8 comments
+
+== Replace a slice with the new substring using  str.slice_replace();
+
+            comments.str.slice_replace(5,10,"Wolves Rule! ").head(8)
+
+-- replace the occurence of given substring with the different substring using str.replace():
+
+          comments.str.replace("Wolves","Pups").head(8)
+
+--- Check whether a particular substring is present or not in string
+
+                  logical_index = comments.str.lower().str.contains("wigg|drew")
+                    comments["logical_index].heaad(10)   // get the 10 comments about wigg|drew
+
+                    ------ Regular Expression--------------------
+" . "  - period character that matches any character other than a newline
+
+            my_series =pd.Series(["will","bill","Till","still","gull"])
+              my_series.str.contains(".ill")    // Match any substring ending in ill
+              
+     " []" - Square brackets specify a set of characters to match:
+
+        my_series.str.contains("[Tt]ill") // Match T or t followed by ill
+      
