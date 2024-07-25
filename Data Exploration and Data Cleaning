@@ -1,1 +1,56 @@
+            import numpy as np
+            import pandas as pd
+            import os
 
+         titanic_train = pd.read_csv("../input/train.csv")
+         titanic_train.shape   // Check dimension
+          titanic_train.info()
+        titanic_train..head(5)
+         titanic_train.describe()  // count,mean,max,min,25% etc
+       
+        categorical =titanic_train.dtypes[titanic_train.dtypes=="object"].index
+         titanic_train[categorical].describe()
+          del titanic_train["PassengerId"]
+           sorted(titanic_train["Name"])[0:15]       // First 15 sorted names
+           sorted(titanic_train["Cabin"])[0:15] 
+
+-- Should I tranform the Variable
+
+          new_survived= pd.Categorical(titanic_train["Survived"])
+          new_survived=new_survived.rename_categories(["Died","Survived"])
+
+      titanic_train["Cabin"].unique
+
+        pre_cabin =titanic_train["Cabin"].astype(str)   // convert data to str
+        new_Cabin=np.array([cabin[0] for cabin in pre_cabin])   // take first letter
+        new_Cabin= pd.Catyegorical(new_cabin)
+        new_Cabin.describe()
+
+        titanic_train["Cabin"] =new_Cabin
+
+-- to identify the null value or miss value by using .isnull()
+
+        missing = np.where(titanic_train["Age"].isnull()==True)  // it give us the indexes where age value is missing
+        
+-- with 177 missing values it's probably not a good idea to throw all those records away .Here are a few ways we could deal with
+them:
+             1.  Replace the null values with 0s
+             2. Replace the null values with some central value like mean or median
+             3. Impute some other values
+             4. Split the data sets into 2 parts: one set with where records have an Age value and another set has age value is null
+
+          titanic_train.hist(column='Age',figsize =(9,6),bins=20)  // to create histogram
+
+              new_age_var =np.where(titanic_train["Age"].isnull(),   
+                                       28,    // value if check is true
+                                     titanic_train["Age"]       // value if check is false
+                           )
+                  titanic_train["Age"] =new_age_var
+                  titanic_train["Age"].describe()
+
+---  Outliers are extreme numerical values : values that lie far away from the typical values a variable taken on.Creating plots is one of the quickest ways to detect outliers
+
+                    titanic_train["Fare"].plot(kind="box",figsize(9,9))
+
+         index = np.where(titanic_train["Fare"] == max(titanic_train["Fare"]))
+            titanic_train.loc[index]
