@@ -1,1 +1,18 @@
+                                  DEALING WITH DATES 
 
+                 import numpy as np
+                 import pandas as pd
+
+               dates =pd.read_csv("../inputy/lesson-16-dates/lesson_16_dates.csv")
+                dates            // Check the dates
+
+               for col in dates:
+                     print(type(dates[col][1]))            // <class,'str'>
+
+------- The o/p confirms that all the date data is currently in string form. to work with dates , we need to convert them from string in data format built for processing dates.
+
+                   dates =pd.read_csv("../inputy/lesson-16-dates/lesson_16_dates.csv",parses_dates=[0,1,2,3,4])  // convert cols to timestammp
+                   for col in dates:
+                     print(type(dates[col][1]))            // <class,'pandas._libs.tslibs.timestamps.Timestamp'>
+
+                   pd.to_datetime(odd_date,format ="%H:%M:%S%Y-%d-%m")
