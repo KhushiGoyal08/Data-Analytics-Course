@@ -1,1 +1,89 @@
+--- Visualizations are one of the most powerful tools at your disposal for exploring data and communicating data insights.
+     Plots in pandas are built on top of a popular Python plotting library called matplotlib,which comes with the Anaconda Python 
+    distribution.
 
+                import numpy as np
+                import pandas as pd
+                import matplotlib
+
+               diamonds=pd.read_csv("../input/diamonds/diamonds.csv")
+              diamonds= diamonds.drop("Unnamed:0",axis=1)   
+              diamonds.shape             // Check data dimensions
+               diamonds.head(5)
+
+           ______________________HISTOGRAM___________________________
+
+             A histogram ia a univariate(a plot that displays one variable) that groups a numeric variable into bins and displays the 
+      number of observations that fall within each bin.A Histogram is a useful tool for getting a senses of the distribution
+       of a numeric variable.
+
+                         diamonds.hist(column ="carat" ,       // column to plot
+                                       figsize=(8,8) ,          // Plot Size
+                                       color ="blue");          // Plot color
+
+
+                         diamonds.hist(column ="carat" ,       // column to plot
+                                       figsize=(8,8) ,          // Plot Size
+                                        bins=50,               // use 50 bins
+                                        range =(0,3.5),       // limit x -axis range
+                                       color ="blue");          // Plot color
+
+______________________________________BoxPlots____________________________________________
+
+ Boxplots are another type of univariate plot for summarizing distributions of numeric data graphically . (50% of middle value)
+
+                 diamonds.boxplots(column="carat")
+                      diamonds.boxplots(column="price",            // column to plot
+                                          by ="clarity",             // column to split upon
+                                      figsize=(8,8),
+                                            color="blue")
+
+______________________________Density Plots_______________________________________
+
+ -- A density  plot shows the distribution of a numeric variable with the continuous curve. It is  similar to histogram
+   but without discrete bins, it gives a better picture of the underlying shape of the distribution
+
+                 diamonds["carat"].plot(kind ="density",   // create density plot
+                                         figsize=(8,8),
+                                          xlim = (0,5));        // limit x axis values
+
+__________________________________________BarPlots______________________________
+
+--- Barplots are graphs that visually display counts of categorical variables.we can create a barplot by creating the table of counts
+  for  a certain variable using the pd.crosstab() function and then passing the counts to df.plot(kind="bar"):
+
+                carat_table = pd.crosstab(index=diamonds["clarity"],columns="count")
+
+                     carat_table.plot(kind="bar",figsize=(8,8));
+
+__________________________Scatterplots__________________________________
+
+Scatterplots are bivariate (two variable) plots that take two numeric variables and plot data points on the x/y plane.
+
+                    diamonds.plot(kind ="scatter",      // create a scatterplot
+                                x="carat"               // put carat on x-axis
+                                 y="price"            // put price on the y axis
+                            figsize=(10,10),
+                           ylim =(0,20000))
+
+___________________________________Line Plots_______________________________________
+
+   -- Line plots are charts used to show the change in a numeric variable based on some other ordered variable.
+   Line plots are often used to plot time series data to show the evolution of a variable over time.Line plots are the default
+ plot type when using df.plot() 
+
+                                 years =[y for y in range(1950,2016)]
+                                readings = [(y+np.random.uniform(0,20)-1990) for y in years]
+                                time_df =pd.DataFrame({"year":years,"readings":readings})
+
+                         // plot the data
+
+                 my_plot= time_df.plot(x="year",
+                           y="readings",
+                             figsize=(8,8))
+
+________________________________Saving Plots____________________________________
+
+           my_fig=my_plot.get_figure()                // get the figure
+
+                my_fig.savefig("line_plot_example.png)       // save to file
