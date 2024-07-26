@@ -1,1 +1,14 @@
+         import numpy as np 
+          import pandas as pd
+---- Frequency tables (crosstabs)are a basic tool you can use to explore data and get an idea of the relationships b/w variables.A frequency table is 
+    just a data table that shows the counts of one or more categorical variables.
 
+          titanic_train =pd.read_csv("../input/train.csv")   // read the data
+           char_cabin = titanic_train["Cabin"].astype(str)    // Convert cabin to str
+            new_Cabin =np.array([cabin[0] for cabin in char_cabin])    // take first letter
+           titanic_train["Cabin"] =pd.Categorical(new_cabin")        // save the new cabin var
+
+             my_tab = pd.crosstab(index =titanic_train["Survived"]  // make a crosstab
+                                      columns ="count")          // name the count col
+
+                type(my_tab)    // confirm that crosstab is a dataframe
