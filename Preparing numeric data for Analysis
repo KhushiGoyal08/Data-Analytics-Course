@@ -1,1 +1,28 @@
 
+                               Centring And Scaling
+
+                          %matplotlib inline
+                           import numpy as np
+                           import pandas as pd
+                mtcars =pd.read_csv("../input/mtcars/mtcars.csv")
+                print(mtcars.head())
+                mtcars.index = mtcars.model               // Set row index to car model
+                del mtcars["model"]           // Drop car name column
+               colmeans =mtcars.sum()/mtcars.shape[0]         // get column means
+                colmeans
+
+-- With the column means in hand ,we just need to subtract the column means from each row in an element-wise fashion to zero center the data.
+   Pandas performs math operations involving DataFrames and columns on an element-wise row-by-row basis by default,so we can 
+   subtract our column means series from the data set to center it:
+
+                      centered = mtcars -colmeans
+                      centered.describe()
+
+Now that the data is centered , we-d like to put it on a common scale . One way to put data on a common scalle is to divide by the standard deviation
+Standard deviation is a statistics that describes the spread of numeric data. The higher the standard deviation,the  data points tend to be spread away
+from the mean value.(df.std())
+
+                       column_deviations =mtcars.std(axis=0)
+                       centered_and_scaled =ceentered/column_deviations
+                       centered_and_scaled.describe()
+
