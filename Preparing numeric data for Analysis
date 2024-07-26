@@ -25,4 +25,87 @@ from the mean value.(df.std())
                        column_deviations =mtcars.std(axis=0)
                        centered_and_scaled =ceentered/column_deviations
                        centered_and_scaled.describe()
+  
+            from sklearn import preprocessing
+             scaled_data= preprocessing.scale(mtcars)        // scale the data
+             scaled_cars =pd.DataFrame( scaled_data            // remake  the dataframe
+                                index = mtcars.index,
+                                columns =mtcars.columns)
+             scaled_cars.describe()
+             
+______________________________ Dealing With Skewed Data __________________________________
 
+---- The distribution of data --its overall shapee and how it is spread out -- can have a significant impact on analysis and modelling.
+    Data that roughly evenly spread around the mean value -- known as normally distributed data -- tends to be well - behaved.On the other hand,some data sets
+exhibit significant skewness or asymmetry . To illustrate,lets generate a few distributions:
+
+          normally_distributed = np.random.normal(size =10000)
+          normally_distributed =pd.DataFrame(normally_distributed)      // convert to df
+         normally_distributed.hist(figsize =(8,8),    // plot histogram
+                                     bins =30);
+
+ ____________________ Genersation of Skewed Data _____________________
+
+     skewed = np.random.exponential(scale = 2                  // generate skewed data
+                                      size =10000)
+      skewed = pd.DataFrame(skewed)          // convert to df
+      skewed.hist(figsize=(8,8),             // plot histogram
+                   bins =50);
+
+ // get the square root of data points*
+          sqrt_transformed =skewed.apply(np.sqrt)
+          sqrt_transformed.hist(figsize =(8,8) , // plot histogram
+                                 bins =50);
+
+--- The df.apply() function applies a given function to each row or column of the DataFrame .In each case,we passs in np.sqrt
+to get the square root of each value.
+
+Now ,let's look at a log transformation:
+
+              log_transformed =(skewed +1).apply(np.log)         // get the log of the data
+              log_transformed.hist(figsize=(8,8),bins=50);
+
+________________________Highly Correlated Variables ______________________________
+
+--- In predictive modelling, each variable you use to construct the model would ideally represent some unique feature of the data.
+       In other words , you want each variable to tell you something different.in reality , variables often exhibit collinearity --- a strong relation
+      =or tendency to move together,typically due to some underlying similarity or common influencing factor,
+
+    We can check the pairwise correlations between numeric variables using the df.corr() function:
+
+                mtcars.iloc[:,0:6].corr()         /// Check the pairwise correlations
+
+          0 means no correlation
+          1 means perfect +ive correlation i.e. one increase the other also increases
+          -1 means perfect negative correlation i.e inverse relationship
+
+---- A scatter plot matrix can be helpful visual aid for inspecting collinearity. We can create one with the pandas
+    scatter_matrix() function located in the tools.plotting pandas folder:
+
+                    from pandas.tools.plotting import scatter_matrix
+                     scatter_matrix(mtcars.iloc[:,0:6],     // make a scatter matrix of 6 columns
+                               figsize =(10,10)             // set plot size
+                              diagonal ='kde');       // show distribution estimates on diagonal
+---- if we find highly correlated variables ,there are a few things we can do including:
+       1 Leave them be
+       2 Remove one or more variables
+        3 Combine them in some way
+
+__________________________Imputing with Sklearn_____________________________
+
+        from sklearn.preprocessing import Imputer
+
+         mtcars["mpg"] = np.where(mtcars["mpg"]>22 ,None,mtcars["mpg"])       // the following line sets a few mpg values to None
+     mtcars["mpg"]            // confirm that missing values were added
+
+Now let's use the Imputer function to fill in missing values based on the mean:
+
+          imp = Imputer(missing_values ='NaN'  // Create imputation model
+                        strategy = 'mean'       // Use mean imputation
+                        axis =0)        || Impute by column
+
+              imputed_cars = imp.fit_transform(mtcars)           // use imputation model to get values
+              imputed_cars = pd.DataFrame(imputed_cars   , // remake DataFrame with new values
+                                index = mtcars.index,
+                               columns =mtcars.columns)
+          imputed_cars.head(10)
