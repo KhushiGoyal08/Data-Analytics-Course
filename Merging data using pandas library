@@ -1,1 +1,20 @@
 
+                        import numpy as np
+                        import pandas as pd
+                        import os
+         table1 = pd.DataFrame({ "P_ID":(1,2,3,4,5,6,7,8),
+                       "gender": ("male","male","female","male","female","male","female","female"),
+                       "height": (71,73,64,64,66,69,62,72),
+                   "weight": (175,225,130,125,165,160,162,250)})
+
+ table2 = pd.DataFrame({ "P_ID":(1,2,3,4,5,6,7,8),
+                       "sex": ("male","male","female","male","male","male","female","female"),
+                       "illness": (7,3,4,4,6,6,2,7),
+                   "checkup": (1,0,0,1,1,0,1,0),
+                "follow_up":(0,0,0,2,1,0,1,0})
+
+--- Both dataframes contains colmn "P_ID" but the other column are different . A Unique identifier like an ID is usually a good key for joining 2 dataframes together.we can combine
+     2 dataframes by a common column with merge():
+
+             combined1= pd.merge(table1,table2,how ="inner",  // merge methods  (left,right,outer)
+                                    on ="P_ID")       // column(s) to join on
