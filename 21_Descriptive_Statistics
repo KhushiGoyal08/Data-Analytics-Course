@@ -1,1 +1,50 @@
 
+___ Descriptive Statistics are measures that summarize important features of data ,often with a single number.
+Producing descriptive statistics is a common first step to take after cleaaning and preparing dataset for analysis.
+
+             -------------Measures of Center-----------------
+
+--- these are statistics that give us a sense of the "middle" of a numeric variable. common measures of center include mean , meadian,mode
+
+                            %matplotlib inline
+                     import numpy as np
+                      import  pandas as pd
+                      import matplotlib.pyplot as plt
+
+   mtcars = pd.read_csv("../input/mtcars/mtcars.csv")
+   mtcars= mtcars.rename(column ={"Unnamed":model})
+   del mtcars["models"]
+   mtcars.head()
+
+     mtcars.mean()     // col mean
+     mtcars.mean(axis=1)    // get the mean of each row
+
+-- The median of a distribution is the value where 50% of the data lies below it and 50% lies about it.In essence, the meadian splits the data in half
+
+                  mtcars.median()       // get the meadian of each col
+-- normal data -same mean and meadian
+   skewed data -- different mean and meadian
+
+-- the mode of a variable is simply the value that appears most frequently.
+
+      mtcars.mode()
+
+ ---------------------Measures of Spread-----------------------------
+
+Measures of spread(dispersion) are statistics that describe how data varies.While measures of tthe center give us the idea of the
+typical value,measures of spread gives us a senses of how much the data tends to diverge from the 
+typical value.
+-- Range is the distance b/w the maximum and minimum observations:
+              max(mtcars["mpg"])-min(mtcars["mpg"])   // range
+
+         five_num=[ mtcars["mpg"].quantile(0)  , //0% of data
+                      mtcars["mpg"].quantile(0.25),   //25 5itle
+                     mtcars["mpg"].quantile(0.50),
+                      mtcars["mpg"].quantile(0.75),
+                      mtcars["mpg"].quantile(1.0) ]
+
+           or  mtcars["mpg"].describe()
+
+---- Interquantile range is the distance between the 3rd quantile and the 1st quantile
+
+             mtcars["mpg"].quantile(0.75) - mtcars["mpg"].quantile(0.25)      
