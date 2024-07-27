@@ -48,3 +48,41 @@ typical value.
 ---- Interquantile range is the distance between the 3rd quantile and the 1st quantile
 
              mtcars["mpg"].quantile(0.75) - mtcars["mpg"].quantile(0.25)      
+
+boxplot is the better way to visualise these 3rd ,1st quartile ,mean ,median,min and max
+
+         mtcars["mpg"].var()           // give variance of this
+         mtcars["mpg"].std()          // standard deviation 
+abs_median_deviation =abs(mtcars["mpg"].meadian() - mtcars["mpg"])
+
+ abs_median_deviation.median()       
+
+
+____________________________________Skewness And Kurtosis_______________________________
+
+Beyond measures of center and spread,descriptive statistics include measures that give me a sense of the shape
+of the distriibution.      skewness measures the assymmetry of the distribution  while kurtosis measures
+how much data is in the tails of a distribution v.s. the center.
+
+             mtcars["mpg"].skew()         // check skewness
+         mtcars["mpg"].kurt()                   // check kurtosis
+
+To explore these two measures further, let's create some dummy data and inspect it:
+
+        norm_data = np.random.normal(size=10000)
+skewed_data =np.concatenate(np.random.normal(size=35000)+2,
+np.random.exponential(size=50000)*(-1),axis =0)
+
+uniform_data = np.random.uniform(0,2,size=100000)
+peaked_data =np.concatenate(np.random.exponential(size=50000),np.random.exponential(size=50000)*(-1)),
+                                  axis=0)
+
+data_df= pd.DataFrame( {
+                     "norm":norm_data,
+                     "skewed":skewed_data,
+                      "uniform":uniform_data,
+                      "peaked":peaked_data})
+
+     data_df.plot(kind ="density",figsize=(10,10),xlim=(-5,5));
+          data_df.skew()
+          data_df.kurt()
