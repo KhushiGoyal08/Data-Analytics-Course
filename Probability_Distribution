@@ -1,1 +1,19 @@
 
+ A probability distribution describes how a random variable is distributed; 
+
+---------------------The uniform distribution------------------------
+
+-- the uniform distribution is a probability distribution where each value within a certain range is equally likely to occur
+    and value outside of the range never occur.
+                  %matplotlib inline
+                  import numpy as np
+                   import pandas as pd
+                    import matplotlib.pyplot as plt
+                   import scipy.stats as stats
+
+uniform_data = stats.uniform.rvs( size =100000
+                         loc=0,
+                          scale =10)
+
+                pd.DataFrame(uniform_data).plot( kind = "density" ,figsize =(9,9) ,xlim=(-1,11));
+
